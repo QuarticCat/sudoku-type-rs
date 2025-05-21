@@ -3,10 +3,6 @@
 
 use std::marker::ConstParamTy;
 
-
-// 1. ヘルパー要素
-// -----------------------------------------------------------------------------
-
 struct Assert<const COND: bool>;
 trait IsTrue {}
 impl IsTrue for Assert<true> {}
@@ -52,61 +48,52 @@ const fn is_unique(
 }
 
 struct Sudoku<
-    const Cell1: Cell, const Cell2: Cell, const Cell3: Cell, const Cell4: Cell, const Cell5: Cell, const Cell6: Cell, const Cell7: Cell, const Cell8: Cell, const Cell9: Cell,
-    const Cell10: Cell, const Cell11: Cell, const Cell12: Cell, const Cell13: Cell, const Cell14: Cell, const Cell15: Cell, const Cell16: Cell, const Cell17: Cell, const Cell18: Cell,
-    const Cell19: Cell, const Cell20: Cell, const Cell21: Cell, const Cell22: Cell, const Cell23: Cell, const Cell24: Cell, const Cell25: Cell, const Cell26: Cell, const Cell27: Cell,
-    const Cell28: Cell, const Cell29: Cell, const Cell30: Cell, const Cell31: Cell, const Cell32: Cell, const Cell33: Cell, const Cell34: Cell, const Cell35: Cell, const Cell36: Cell,
-    const Cell37: Cell, const Cell38: Cell, const Cell39: Cell, const Cell40: Cell, const Cell41: Cell, const Cell42: Cell, const Cell43: Cell, const Cell44: Cell, const Cell45: Cell,
-    const Cell46: Cell, const Cell47: Cell, const Cell48: Cell, const Cell49: Cell, const Cell50: Cell, const Cell51: Cell, const Cell52: Cell, const Cell53: Cell, const Cell54: Cell,
-    const Cell55: Cell, const Cell56: Cell, const Cell57: Cell, const Cell58: Cell, const Cell59: Cell, const Cell60: Cell, const Cell61: Cell, const Cell62: Cell, const Cell63: Cell,
-    const Cell64: Cell, const Cell65: Cell, const Cell66: Cell, const Cell67: Cell, const Cell68: Cell, const Cell69: Cell, const Cell70: Cell, const Cell71: Cell, const Cell72: Cell,
-    const Cell73: Cell, const Cell74: Cell, const Cell75: Cell, const Cell76: Cell, const Cell77: Cell, const Cell78: Cell, const Cell79: Cell, const Cell80: Cell, const Cell81: Cell,
->(
-    Cell, Cell, Cell,  Cell, Cell, Cell,  Cell, Cell, Cell,
-    Cell, Cell, Cell,  Cell, Cell, Cell,  Cell, Cell, Cell,
-    Cell, Cell, Cell,  Cell, Cell, Cell,  Cell, Cell, Cell,
-    
-    Cell, Cell, Cell,  Cell, Cell, Cell,  Cell, Cell, Cell,
-    Cell, Cell, Cell,  Cell, Cell, Cell,  Cell, Cell, Cell,
-    Cell, Cell, Cell,  Cell, Cell, Cell,  Cell, Cell, Cell,
-    
-    Cell, Cell, Cell,  Cell, Cell, Cell,  Cell, Cell, Cell,
-    Cell, Cell, Cell,  Cell, Cell, Cell,  Cell, Cell, Cell,
-    Cell, Cell, Cell,  Cell, Cell, Cell,  Cell, Cell, Cell,
-)
+    //const Cells: [[Cell; 9]; 9]
+    const X11: Cell, const X12: Cell, const X13: Cell, const X14: Cell, const X15: Cell, const X16: Cell, const X17: Cell, const X18: Cell, const X19: Cell,
+    const X21: Cell, const X22: Cell, const X23: Cell, const X24: Cell, const X25: Cell, const X26: Cell, const X27: Cell, const X28: Cell, const X29: Cell,
+    const X31: Cell, const X32: Cell, const X33: Cell, const X34: Cell, const X35: Cell, const X36: Cell, const X37: Cell, const X38: Cell, const X39: Cell,
+    const X41: Cell, const X42: Cell, const X43: Cell, const X44: Cell, const X45: Cell, const X46: Cell, const X47: Cell, const X48: Cell, const X49: Cell,
+    const X51: Cell, const X52: Cell, const X53: Cell, const X54: Cell, const X55: Cell, const X56: Cell, const X57: Cell, const X58: Cell, const X59: Cell,
+    const X61: Cell, const X62: Cell, const X63: Cell, const X64: Cell, const X65: Cell, const X66: Cell, const X67: Cell, const X68: Cell, const X69: Cell,
+    const X71: Cell, const X72: Cell, const X73: Cell, const X74: Cell, const X75: Cell, const X76: Cell, const X77: Cell, const X78: Cell, const X79: Cell,
+    const X81: Cell, const X82: Cell, const X83: Cell, const X84: Cell, const X85: Cell, const X86: Cell, const X87: Cell, const X88: Cell, const X89: Cell,
+    const X91: Cell, const X92: Cell, const X93: Cell, const X94: Cell, const X95: Cell, const X96: Cell, const X97: Cell, const X98: Cell, const X99: Cell
+>([[Cell; 9]; 9])
 where
     // 行の判定
-    Assert<{ is_unique(Cell1, Cell2, Cell3, Cell4, Cell5, Cell6, Cell7, Cell8, Cell9) }>: IsTrue,
-    Assert<{ is_unique(Cell10, Cell11, Cell12, Cell13, Cell14, Cell15, Cell16, Cell17, Cell18) }>: IsTrue,
-    Assert<{ is_unique(Cell19, Cell20, Cell21, Cell22, Cell23, Cell24, Cell25, Cell26, Cell27) }>: IsTrue,
-    Assert<{ is_unique(Cell28, Cell29, Cell30, Cell31, Cell32, Cell33, Cell34, Cell35, Cell36) }>: IsTrue,
-    Assert<{ is_unique(Cell37, Cell38, Cell39, Cell40, Cell41, Cell42, Cell43, Cell44, Cell45) }>: IsTrue,
-    Assert<{ is_unique(Cell46, Cell47, Cell48, Cell49, Cell50, Cell51, Cell52, Cell53, Cell54) }>: IsTrue,
-    Assert<{ is_unique(Cell55, Cell56, Cell57, Cell58, Cell59, Cell60, Cell61, Cell62, Cell63) }>: IsTrue,
-    Assert<{ is_unique(Cell64, Cell65, Cell66, Cell67, Cell68, Cell69, Cell70, Cell71, Cell72) }>: IsTrue,
-    Assert<{ is_unique(Cell73, Cell74, Cell75, Cell76, Cell77, Cell78, Cell79, Cell80, Cell81) }>: IsTrue,
+    Assert<{ is_unique(X11, X12, X13, X14, X15, X16, X17, X18, X19) }>: IsTrue,
+    Assert<{ is_unique(X21, X22, X23, X24, X25, X26, X27, X28, X29) }>: IsTrue,
+    Assert<{ is_unique(X31, X32, X33, X34, X35, X36, X37, X38, X39) }>: IsTrue,
+    Assert<{ is_unique(X41, X42, X43, X44, X45, X46, X47, X48, X49) }>: IsTrue,
+    Assert<{ is_unique(X51, X52, X53, X54, X55, X56, X57, X58, X59) }>: IsTrue,
+    Assert<{ is_unique(X61, X62, X63, X64, X65, X66, X67, X68, X69) }>: IsTrue,
+    Assert<{ is_unique(X71, X72, X73, X74, X75, X76, X77, X78, X79) }>: IsTrue,
+    Assert<{ is_unique(X81, X82, X83, X84, X85, X86, X87, X88, X89) }>: IsTrue,
+    Assert<{ is_unique(X91, X92, X93, X94, X95, X96, X97, X98, X99) }>: IsTrue,
 
     // 列の判定
-    Assert<{ is_unique(Cell1, Cell10, Cell19, Cell28, Cell37, Cell46, Cell55, Cell64, Cell73) }>: IsTrue,
-    Assert<{ is_unique(Cell2, Cell11, Cell20, Cell29, Cell38, Cell47, Cell56, Cell65, Cell74) }>: IsTrue,
-    Assert<{ is_unique(Cell3, Cell12, Cell21, Cell30, Cell39, Cell48, Cell57, Cell66, Cell75) }>: IsTrue,
-    Assert<{ is_unique(Cell4, Cell13, Cell22, Cell31, Cell40, Cell49, Cell58, Cell67, Cell76) }>: IsTrue,
-    Assert<{ is_unique(Cell5, Cell14, Cell23, Cell32, Cell41, Cell50, Cell59, Cell68, Cell77) }>: IsTrue,
-    Assert<{ is_unique(Cell6, Cell15, Cell24, Cell33, Cell42, Cell51, Cell60, Cell69, Cell78) }>: IsTrue,
-    Assert<{ is_unique(Cell7, Cell16, Cell25, Cell34, Cell43, Cell52, Cell61, Cell70, Cell79) }>: IsTrue,
-    Assert<{ is_unique(Cell8, Cell17, Cell26, Cell35, Cell44, Cell53, Cell62, Cell71, Cell80) }>: IsTrue,
-    Assert<{ is_unique(Cell9, Cell18, Cell27, Cell36, Cell45, Cell54, Cell63, Cell72, Cell81) }>: IsTrue,
+    Assert<{ is_unique(X11, X21, X31, X41, X51, X61, X71, X81, X91) }>: IsTrue,
+    Assert<{ is_unique(X12, X22, X32, X42, X52, X62, X72, X82, X92) }>: IsTrue,
+    Assert<{ is_unique(X13, X23, X33, X43, X53, X63, X73, X83, X93) }>: IsTrue,
+    Assert<{ is_unique(X14, X24, X34, X44, X54, X64, X74, X84, X94) }>: IsTrue,
+    Assert<{ is_unique(X15, X25, X35, X45, X55, X65, X75, X85, X95) }>: IsTrue,
+    Assert<{ is_unique(X16, X26, X36, X46, X56, X66, X76, X86, X96) }>: IsTrue,
+    Assert<{ is_unique(X17, X27, X37, X47, X57, X67, X77, X87, X97) }>: IsTrue,
+    Assert<{ is_unique(X18, X28, X38, X48, X58, X68, X78, X88, X98) }>: IsTrue,
+    Assert<{ is_unique(X19, X29, X39, X49, X59, X69, X79, X89, X99) }>: IsTrue,
 
     // ブロックの判定
-    Assert<{ is_unique(Cell1, Cell2, Cell3, Cell10, Cell11, Cell12, Cell19, Cell20, Cell21) }>: IsTrue,
-    Assert<{ is_unique(Cell4, Cell5, Cell6, Cell13, Cell14, Cell15, Cell22, Cell23, Cell24) }>: IsTrue,
-    Assert<{ is_unique(Cell7, Cell8, Cell9, Cell16, Cell17, Cell18, Cell25, Cell26, Cell27) }>: IsTrue,
-    Assert<{ is_unique(Cell28, Cell29, Cell30, Cell37, Cell38, Cell39, Cell46, Cell47, Cell48) }>: IsTrue,
-    Assert<{ is_unique(Cell31, Cell32, Cell33, Cell40, Cell41, Cell42, Cell49, Cell50, Cell51) }>: IsTrue,
-    Assert<{ is_unique(Cell52, Cell53, Cell54, Cell61, Cell62, Cell63, Cell70, Cell71, Cell72) }>: IsTrue,
-    Assert<{ is_unique(Cell55, Cell56, Cell57, Cell64, Cell65, Cell66, Cell73, Cell74, Cell75) }>: IsTrue,
-    Assert<{ is_unique(Cell58, Cell59, Cell60, Cell67, Cell68, Cell69, Cell76, Cell77, Cell78) }>: IsTrue,
-    Assert<{ is_unique(Cell61, Cell62, Cell63, Cell70, Cell71, Cell72, Cell79, Cell80, Cell81) }>: IsTrue,
+    Assert<{ is_unique(X11, X12, X13, X21, X22, X23, X31, X32, X33) }>: IsTrue,
+    Assert<{ is_unique(X14, X15, X16, X24, X25, X26, X34, X35, X36) }>: IsTrue,
+    Assert<{ is_unique(X17, X18, X19, X27, X28, X29, X37, X38, X39) }>: IsTrue,
+    
+    Assert<{ is_unique(X41, X42, X43, X51, X52, X53, X61, X62, X63) }>: IsTrue,
+    Assert<{ is_unique(X44, X45, X46, X54, X55, X56, X64, X65, X66) }>: IsTrue,
+    Assert<{ is_unique(X47, X48, X49, X57, X58, X59, X67, X68, X69) }>: IsTrue,
+    
+    Assert<{ is_unique(X71, X72, X73, X81, X82, X83, X91, X92, X93) }>: IsTrue,
+    Assert<{ is_unique(X74, X75, X76, X84, X85, X86, X94, X95, X96) }>: IsTrue,
+    Assert<{ is_unique(X77, X78, X79, X87, X88, X89, X97, X98, X99) }>: IsTrue
 ;
 
 fn main() {
@@ -120,19 +107,19 @@ fn main() {
     const C8: Cell = Cell::Filled(Num::Eight);
     const C9: Cell = Cell::Filled(Num::Nine);
 
-    const NN: Cell = Cell::Empty;
+    const __: Cell = Cell::Empty;
 
     let sudoku = Sudoku::<
-        C1, C3, C2,  NN, NN, NN,  NN, NN, NN, 
-        NN, NN, C4,  NN, NN, NN,  C9, NN, NN, 
-        NN, C5, NN,  NN, NN, NN,  NN, C1, NN, 
-        
-        NN, NN, NN,  C2, NN, NN,  NN, NN, NN, 
-        NN, NN, C1,  NN, NN, NN,  NN, NN, NN, 
-        NN, C6, NN,  C7, NN, C1,  C2, NN, C8, 
-        
-        NN, NN, NN,  NN, NN, NN,  C1, NN, NN, 
-        NN, NN, NN,  NN, NN, C2,  NN, NN, NN, 
-        C2, NN, NN,  NN, NN, NN,  NN, NN, NN, 
+        C1, C3, C2,  __, __, __,  __, __, __,
+        __, __, C4,  __, __, __,  C9, __, __,
+        __, C5, __,  __, __, __,  __, C1, __,
+
+        __, __, __,  C2, __, __,  __, __, __,
+        __, __, C1,  __, __, __,  __, __, __,
+        __, C6, __,  C7, __, C1,  C2, __, C8,
+
+        __, __, __,  __, __, __,  C1, __, __,
+        __, __, __,  __, __, C2,  __, __, __,
+        C2, __, __,  __, __, __,  __, __, __,
     >;
 }
