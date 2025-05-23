@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <excludedPredefinedLibrary name="sudoku-type-rs/mise/installs/node/23.11.0/lib/node_modules" />
+    <excludedPredefinedLibrary name="sudoku-type-rs/mise/installs/node/23.11/lib/node_modules" />
+    <excludedPredefinedLibrary name="sudoku-type-rs/mise/installs/node/23/lib/node_modules" />
+    <excludedPredefinedLibrary name="sudoku-type-rs/mise/installs/node/latest/lib/node_modules" />
+  </component>
+</project>
