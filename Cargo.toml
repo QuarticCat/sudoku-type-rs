@@ -3,5 +3,18 @@ name = "sudoku-type-rs"
 version = "0.1.0"
 edition = "2024"
 
-[dependencies]
-typenum = "1.18.0"
+[[bin]]
+name = "sudoku_stable"
+path = "src/sudoku_stable.rs"
+
+[[bin]]
+name = "sudoku_generic_const_exprs"
+path = "src/sudoku_generic_const_exprs.rs"
+
+[[bin]]
+name = "sudoku_negative_bounds"
+path = "src/sudoku_negative_bounds.rs"
+
+[[bin]]
+name = "sudoku_const_params"
+path = "src/sudoku_const_params.rs"

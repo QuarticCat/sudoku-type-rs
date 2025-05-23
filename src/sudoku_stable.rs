@@ -1,14 +1,14 @@
-struct _1;
-struct _2;
-struct _3;
-struct _4;
-struct _5;
-struct _6;
-struct _7;
-struct _8;
-struct _9;
+pub struct _1;
+pub struct _2;
+pub struct _3;
+pub struct _4;
+pub struct _5;
+pub struct _6;
+pub struct _7;
+pub struct _8;
+pub struct _9;
 
-struct __;
+pub struct __;
 
 trait IsCell {}
 impl IsCell for _1 {}
@@ -23,7 +23,7 @@ impl IsCell for _9 {}
 impl IsCell for __ {}
 
 
-pub trait IsDiffType<T, U> {}
+trait IsDiffType<T, U> {}
 impl IsDiffType<_1, _2> for () {}
 impl IsDiffType<_1, _3> for () {}
 impl IsDiffType<_1, _4> for () {}
@@ -125,7 +125,7 @@ impl IsDiffType<__, _7> for () {}
 impl IsDiffType<__, _8> for () {}
 impl IsDiffType<__, _9> for () {}
 
-pub trait AreDiffTypeParams<T1, T2, T3, T4, T5, T6, T7, T8, T9> {}
+trait AreDiffTypeParams<T1, T2, T3, T4, T5, T6, T7, T8, T9> {}
 impl<T1, T2, T3, T4, T5, T6, T7, T8, T9> AreDiffTypeParams<T1, T2, T3, T4, T5, T6, T7, T8, T9> for ()
 where
     (): IsDiffType<T1, T2> + IsDiffType<T1, T3> + IsDiffType<T1, T4> + IsDiffType<T1, T5> + IsDiffType<T1, T6> + IsDiffType<T1, T7> + IsDiffType<T1, T8> + IsDiffType<T1, T9>,
@@ -139,7 +139,7 @@ where
 {}
 
 
-struct Sudoku<
+pub struct Sudoku<
     X11, X12, X13, X14, X15, X16, X17, X18, X19,
     X21, X22, X23, X24, X25, X26, X27, X28, X29,
     X31, X32, X33, X34, X35, X36, X37, X38, X39,

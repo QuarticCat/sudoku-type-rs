@@ -8,11 +8,7 @@ struct Assert<const COND: bool>;
 trait IsTrue {}
 impl IsTrue for Assert<true> {}
 
-struct Sudoku<const Array: [[cell_type; 9]; 9]>
-where Assert<{ premitive_are_unique(Array) }>: IsTrue;
-
 /*
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, ConstParamTy)]
 enum Num {
     One = 1,
@@ -39,9 +35,12 @@ const fn not_eq(a: SudokuCell, b: SudokuCell) -> bool {
         (SudokuCell::Empty, SudokuCell::Filled(_)) | (SudokuCell::Filled(_), SudokuCell::Empty) => true,
     }
 }
-    
 */
-const fn all_different(x1: cell_type, x2: cell_type, x3: cell_type, x4: cell_type, x5: cell_type, x6: cell_type, x7: cell_type, x8: cell_type, x9: cell_type) -> bool { // Enumなどを使う場合は、その型用にmatchなどで不等を示すconst関数を実装する
+
+pub struct Sudoku<const Array: [[cell_type; 9]; 9]>
+where Assert<{ sudoku_is_valid(Array) }>: IsTrue;
+
+const fn are_diff_type_params(x1: cell_type, x2: cell_type, x3: cell_type, x4: cell_type, x5: cell_type, x6: cell_type, x7: cell_type, x8: cell_type, x9: cell_type) -> bool { // Enumなどを使う場合は、その型用にmatchなどで不等を示すconst関数を実装する
     x1 != x2 && x1 != x3 && x1 != x4 && x1 != x5 && x1 != x6 && x1 != x7 && x1 != x8 && x1 != x9
     && x2 != x3 && x2 != x4 && x2 != x5 && x2 != x6 && x2 != x7 && x2 != x8 && x2 != x9
     && x3 != x4 && x3 != x5 && x3 != x6 && x3 != x7 && x3 != x8 && x3 != x9
@@ -52,42 +51,41 @@ const fn all_different(x1: cell_type, x2: cell_type, x3: cell_type, x4: cell_typ
     && x8 != x9
 }
 
-const fn premitive_are_unique(array: [[cell_type; 9]; 9]) -> bool {
+const fn sudoku_is_valid(array: [[cell_type; 9]; 9]) -> bool {
     ( // 横行
-        all_different(array[0][0], array[0][1], array[0][2], array[0][3], array[0][4], array[0][5], array[0][6], array[0][7], array[0][8])
-        && all_different(array[1][0], array[1][1], array[1][2], array[1][3], array[1][4], array[1][5], array[1][6], array[1][7], array[1][8])
-        && all_different(array[2][0], array[2][1], array[2][2], array[2][3], array[2][4], array[2][5], array[2][6], array[2][7], array[2][8])
-        && all_different(array[3][0], array[3][1], array[3][2], array[3][3], array[3][4], array[3][5], array[3][6], array[3][7], array[3][8])
-        && all_different(array[4][0], array[4][1], array[4][2], array[4][3], array[4][4], array[4][5], array[4][6], array[4][7], array[4][8])
-        && all_different(array[5][0], array[5][1], array[5][2], array[5][3], array[5][4], array[5][5], array[5][6], array[5][7], array[5][8])
-        && all_different(array[6][0], array[6][1], array[6][2], array[6][3], array[6][4], array[6][5], array[6][6], array[6][7], array[6][8])
-        && all_different(array[7][0], array[7][1], array[7][2], array[7][3], array[7][4], array[7][5], array[7][6], array[7][7], array[7][8])
-        && all_different(array[8][0], array[8][1], array[8][2], array[8][3], array[8][4], array[8][5], array[8][6], array[8][7], array[8][8])
+        are_diff_type_params(array[0][0], array[0][1], array[0][2], array[0][3], array[0][4], array[0][5], array[0][6], array[0][7], array[0][8])
+        && are_diff_type_params(array[1][0], array[1][1], array[1][2], array[1][3], array[1][4], array[1][5], array[1][6], array[1][7], array[1][8])
+        && are_diff_type_params(array[2][0], array[2][1], array[2][2], array[2][3], array[2][4], array[2][5], array[2][6], array[2][7], array[2][8])
+        && are_diff_type_params(array[3][0], array[3][1], array[3][2], array[3][3], array[3][4], array[3][5], array[3][6], array[3][7], array[3][8])
+        && are_diff_type_params(array[4][0], array[4][1], array[4][2], array[4][3], array[4][4], array[4][5], array[4][6], array[4][7], array[4][8])
+        && are_diff_type_params(array[5][0], array[5][1], array[5][2], array[5][3], array[5][4], array[5][5], array[5][6], array[5][7], array[5][8])
+        && are_diff_type_params(array[6][0], array[6][1], array[6][2], array[6][3], array[6][4], array[6][5], array[6][6], array[6][7], array[6][8])
+        && are_diff_type_params(array[7][0], array[7][1], array[7][2], array[7][3], array[7][4], array[7][5], array[7][6], array[7][7], array[7][8])
+        && are_diff_type_params(array[8][0], array[8][1], array[8][2], array[8][3], array[8][4], array[8][5], array[8][6], array[8][7], array[8][8])
     ) &&
     ( // 縦列
-        all_different(array[0][0], array[1][0], array[2][0], array[3][0], array[4][0], array[5][0], array[6][0], array[7][0], array[8][0])
-        && all_different(array[0][1], array[1][1], array[2][1], array[3][1], array[4][1], array[5][1], array[6][1], array[7][1], array[8][1])
-        && all_different(array[0][2], array[1][2], array[2][2], array[3][2], array[4][2], array[5][2], array[6][2], array[7][2], array[8][2])
-        && all_different(array[0][3], array[1][3], array[2][3], array[3][3], array[4][3], array[5][3], array[6][3], array[7][3], array[8][3])
-        && all_different(array[0][4], array[1][4], array[2][4], array[3][4], array[4][4], array[5][4], array[6][4], array[7][4], array[8][4])
-        && all_different(array[0][5], array[1][5], array[2][5], array[3][5], array[4][5], array[5][5], array[6][5], array[7][5], array[8][5])
-        && all_different(array[0][6], array[1][6], array[2][6], array[3][6], array[4][6], array[5][6], array[6][6], array[7][6], array[8][6])
-        && all_different(array[0][7], array[1][7], array[2][7], array[3][7], array[4][7], array[5][7], array[6][7], array[7][7], array[8][7])
-        && all_different(array[0][8], array[1][8], array[2][8], array[3][8], array[4][8], array[5][8], array[6][8], array[7][8], array[8][8])
+        are_diff_type_params(array[0][0], array[1][0], array[2][0], array[3][0], array[4][0], array[5][0], array[6][0], array[7][0], array[8][0])
+        && are_diff_type_params(array[0][1], array[1][1], array[2][1], array[3][1], array[4][1], array[5][1], array[6][1], array[7][1], array[8][1])
+        && are_diff_type_params(array[0][2], array[1][2], array[2][2], array[3][2], array[4][2], array[5][2], array[6][2], array[7][2], array[8][2])
+        && are_diff_type_params(array[0][3], array[1][3], array[2][3], array[3][3], array[4][3], array[5][3], array[6][3], array[7][3], array[8][3])
+        && are_diff_type_params(array[0][4], array[1][4], array[2][4], array[3][4], array[4][4], array[5][4], array[6][4], array[7][4], array[8][4])
+        && are_diff_type_params(array[0][5], array[1][5], array[2][5], array[3][5], array[4][5], array[5][5], array[6][5], array[7][5], array[8][5])
+        && are_diff_type_params(array[0][6], array[1][6], array[2][6], array[3][6], array[4][6], array[5][6], array[6][6], array[7][6], array[8][6])
+        && are_diff_type_params(array[0][7], array[1][7], array[2][7], array[3][7], array[4][7], array[5][7], array[6][7], array[7][7], array[8][7])
+        && are_diff_type_params(array[0][8], array[1][8], array[2][8], array[3][8], array[4][8], array[5][8], array[6][8], array[7][8], array[8][8])
     ) &&
     ( // ブロック
-        all_different(array[0][0], array[0][1], array[0][2], array[1][0], array[1][1], array[1][2], array[2][0], array[2][1], array[2][2])
-        && all_different(array[0][3], array[0][4], array[0][5], array[1][3], array[1][4], array[1][5], array[2][3], array[2][4], array[2][5])
-        && all_different(array[0][6], array[0][7], array[0][8], array[1][6], array[1][7], array[1][8], array[2][6], array[2][7], array[2][8])
-        && all_different(array[3][0], array[3][1], array[3][2], array[4][0], array[4][1], array[4][2], array[5][0], array[5][1], array[5][2])
-        && all_different(array[3][3], array[3][4], array[3][5], array[4][3], array[4][4], array[4][5], array[5][3], array[5][4], array[5][5])
-        && all_different(array[3][6], array[3][7], array[3][8], array[4][6], array[4][7], array[4][8], array[5][6], array[5][7], array[5][8])
-        && all_different(array[6][0], array[6][1], array[6][2], array[7][0], array[7][1], array[7][2], array[8][0], array[8][1], array[8][2])
-        && all_different(array[6][3], array[6][4], array[6][5], array[7][3], array[7][4], array[7][5], array[8][3], array[8][4], array[8][5])
-        && all_different(array[6][6], array[6][7], array[6][8], array[7][6], array[7][7], array[7][8], array[8][6], array[8][7], array[8][8])
+        are_diff_type_params(array[0][0], array[0][1], array[0][2], array[1][0], array[1][1], array[1][2], array[2][0], array[2][1], array[2][2])
+        && are_diff_type_params(array[0][3], array[0][4], array[0][5], array[1][3], array[1][4], array[1][5], array[2][3], array[2][4], array[2][5])
+        && are_diff_type_params(array[0][6], array[0][7], array[0][8], array[1][6], array[1][7], array[1][8], array[2][6], array[2][7], array[2][8])
+        && are_diff_type_params(array[3][0], array[3][1], array[3][2], array[4][0], array[4][1], array[4][2], array[5][0], array[5][1], array[5][2])
+        && are_diff_type_params(array[3][3], array[3][4], array[3][5], array[4][3], array[4][4], array[4][5], array[5][3], array[5][4], array[5][5])
+        && are_diff_type_params(array[3][6], array[3][7], array[3][8], array[4][6], array[4][7], array[4][8], array[5][6], array[5][7], array[5][8])
+        && are_diff_type_params(array[6][0], array[6][1], array[6][2], array[7][0], array[7][1], array[7][2], array[8][0], array[8][1], array[8][2])
+        && are_diff_type_params(array[6][3], array[6][4], array[6][5], array[7][3], array[7][4], array[7][5], array[8][3], array[8][4], array[8][5])
+        && are_diff_type_params(array[6][6], array[6][7], array[6][8], array[7][6], array[7][7], array[7][8], array[8][6], array[8][7], array[8][8])
     )
 }
-
 
 
 fn main() {

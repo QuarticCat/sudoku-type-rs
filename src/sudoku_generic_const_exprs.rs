@@ -1,17 +1,17 @@
 #![feature(generic_const_exprs)]
 #![feature(specialization)]
 
-struct _1;
-struct _2;
-struct _3;
-struct _4;
-struct _5;
-struct _6;
-struct _7;
-struct _8;
-struct _9;
+pub struct _1;
+pub struct _2;
+pub struct _3;
+pub struct _4;
+pub struct _5;
+pub struct _6;
+pub struct _7;
+pub struct _8;
+pub struct _9;
 
-struct __;
+pub struct __;
 
 trait IsCell {}
 impl IsCell for _1 {}
@@ -25,6 +25,7 @@ impl IsCell for _8 {}
 impl IsCell for _9 {}
 impl IsCell for __ {}
 
+
 struct Assert<const COND: bool>;
 
 trait IsTrue {}
@@ -32,6 +33,7 @@ impl IsTrue for Assert<true> {}
 
 trait IsFalse {}
 impl IsFalse for Assert<false> {}
+
 
 trait EqHelper<T, U> {
     const ARE_EQUAL: bool;
@@ -52,8 +54,8 @@ where
 {}
 
 
-trait AllDifferentTypes<T1, T2, T3, T4, T5, T6, T7, T8, T9> {}
-impl<T1, T2, T3, T4, T5, T6, T7, T8, T9> AllDifferentTypes<T1, T2, T3, T4, T5, T6, T7, T8, T9> for ()
+trait AreDiffTypeParams<T1, T2, T3, T4, T5, T6, T7, T8, T9> {}
+impl<T1, T2, T3, T4, T5, T6, T7, T8, T9> AreDiffTypeParams<T1, T2, T3, T4, T5, T6, T7, T8, T9> for ()
 where
     (): NotEq<T1, T2> + NotEq<T1, T3> + NotEq<T1, T4> + NotEq<T1, T5> + NotEq<T1, T6> + NotEq<T1, T7> + NotEq<T1, T8> + NotEq<T1, T9>,
     (): NotEq<T2, T3> + NotEq<T2, T4> + NotEq<T2, T5> + NotEq<T2, T6> + NotEq<T2, T7> + NotEq<T2, T8> + NotEq<T2, T9>,
@@ -66,7 +68,7 @@ where
 {}
 
 
-struct Sudoku<
+pub struct Sudoku<
     X11, X12, X13, X14, X15, X16, X17, X18, X19,
     X21, X22, X23, X24, X25, X26, X27, X28, X29,
     X31, X32, X33, X34, X35, X36, X37, X38, X39,
@@ -100,37 +102,37 @@ where
     X91: IsCell, X92: IsCell, X93: IsCell, X94: IsCell, X95: IsCell, X96: IsCell, X97: IsCell, X98: IsCell, X99: IsCell,
     
     // 行のチェック
-    (): AllDifferentTypes<X11, X12, X13, X14, X15, X16, X17, X18, X19>
-    + AllDifferentTypes<X21, X22, X23, X24, X25, X26, X27, X28, X29>
-    + AllDifferentTypes<X31, X32, X33, X34, X35, X36, X37, X38, X39>
-    + AllDifferentTypes<X41, X42, X43, X44, X45, X46, X47, X48, X49>
-    + AllDifferentTypes<X51, X52, X53, X54, X55, X56, X57, X58, X59>
-    + AllDifferentTypes<X61, X62, X63, X64, X65, X66, X67, X68, X69>
-    + AllDifferentTypes<X71, X72, X73, X74, X75, X76, X77, X78, X79>
-    + AllDifferentTypes<X81, X82, X83, X84, X85, X86, X87, X88, X89>
-    + AllDifferentTypes<X91, X92, X93, X94, X95, X96, X97, X98, X99>,
+    (): AreDiffTypeParams<X11, X12, X13, X14, X15, X16, X17, X18, X19>
+    + AreDiffTypeParams<X21, X22, X23, X24, X25, X26, X27, X28, X29>
+    + AreDiffTypeParams<X31, X32, X33, X34, X35, X36, X37, X38, X39>
+    + AreDiffTypeParams<X41, X42, X43, X44, X45, X46, X47, X48, X49>
+    + AreDiffTypeParams<X51, X52, X53, X54, X55, X56, X57, X58, X59>
+    + AreDiffTypeParams<X61, X62, X63, X64, X65, X66, X67, X68, X69>
+    + AreDiffTypeParams<X71, X72, X73, X74, X75, X76, X77, X78, X79>
+    + AreDiffTypeParams<X81, X82, X83, X84, X85, X86, X87, X88, X89>
+    + AreDiffTypeParams<X91, X92, X93, X94, X95, X96, X97, X98, X99>,
 
     // 列のチェック
-    (): AllDifferentTypes<X11, X21, X31, X41, X51, X61, X71, X81, X91>
-    + AllDifferentTypes<X12, X22, X32, X42, X52, X62, X72, X82, X92>
-    + AllDifferentTypes<X13, X23, X33, X43, X53, X63, X73, X83, X93>
-    + AllDifferentTypes<X14, X24, X34, X44, X54, X64, X74, X84, X94>
-    + AllDifferentTypes<X15, X25, X35, X45, X55, X65, X75, X85, X95>
-    + AllDifferentTypes<X16, X26, X36, X46, X56, X66, X76, X86, X96>
-    + AllDifferentTypes<X17, X27, X37, X47, X57, X67, X77, X87, X97>
-    + AllDifferentTypes<X18, X28, X38, X48, X58, X68, X78, X88, X98>
-    + AllDifferentTypes<X19, X29, X39, X49, X59, X69, X79, X89, X99>,
+    (): AreDiffTypeParams<X11, X21, X31, X41, X51, X61, X71, X81, X91>
+    + AreDiffTypeParams<X12, X22, X32, X42, X52, X62, X72, X82, X92>
+    + AreDiffTypeParams<X13, X23, X33, X43, X53, X63, X73, X83, X93>
+    + AreDiffTypeParams<X14, X24, X34, X44, X54, X64, X74, X84, X94>
+    + AreDiffTypeParams<X15, X25, X35, X45, X55, X65, X75, X85, X95>
+    + AreDiffTypeParams<X16, X26, X36, X46, X56, X66, X76, X86, X96>
+    + AreDiffTypeParams<X17, X27, X37, X47, X57, X67, X77, X87, X97>
+    + AreDiffTypeParams<X18, X28, X38, X48, X58, X68, X78, X88, X98>
+    + AreDiffTypeParams<X19, X29, X39, X49, X59, X69, X79, X89, X99>,
     
     // ブロックのチェック
-    (): AllDifferentTypes<X11, X12, X13, X21, X22, X23, X31, X32, X33>
-    + AllDifferentTypes<X14, X15, X16, X24, X25, X26, X34, X35, X36>
-    + AllDifferentTypes<X17, X18, X19, X27, X28, X29, X37, X38, X39>
-    + AllDifferentTypes<X41, X42, X43, X51, X52, X53, X61, X62, X63>
-    + AllDifferentTypes<X44, X45, X46, X54, X55, X56, X64, X65, X66>
-    + AllDifferentTypes<X47, X48, X49, X57, X58, X59, X67, X68, X69>
-    + AllDifferentTypes<X71, X72, X73, X81, X82, X83, X91, X92, X93>
-    + AllDifferentTypes<X74, X75, X76, X84, X85, X86, X94, X95, X96>
-    + AllDifferentTypes<X77, X78, X79, X87, X88, X89, X97, X98, X99>;
+    (): AreDiffTypeParams<X11, X12, X13, X21, X22, X23, X31, X32, X33>
+    + AreDiffTypeParams<X14, X15, X16, X24, X25, X26, X34, X35, X36>
+    + AreDiffTypeParams<X17, X18, X19, X27, X28, X29, X37, X38, X39>
+    + AreDiffTypeParams<X41, X42, X43, X51, X52, X53, X61, X62, X63>
+    + AreDiffTypeParams<X44, X45, X46, X54, X55, X56, X64, X65, X66>
+    + AreDiffTypeParams<X47, X48, X49, X57, X58, X59, X67, X68, X69>
+    + AreDiffTypeParams<X71, X72, X73, X81, X82, X83, X91, X92, X93>
+    + AreDiffTypeParams<X74, X75, X76, X84, X85, X86, X94, X95, X96>
+    + AreDiffTypeParams<X77, X78, X79, X87, X88, X89, X97, X98, X99>;
 
 
 fn main() {
