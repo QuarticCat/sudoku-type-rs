@@ -1,7 +1,7 @@
 #![feature(generic_const_exprs)]
 #![feature(adt_const_params)]
 
-type cell_type = u8;
+type CellType = u8;
 
 struct Assert<const COND: bool>;
 
@@ -37,10 +37,10 @@ const fn not_eq(a: SudokuCell, b: SudokuCell) -> bool {
 }
 */
 
-pub struct Sudoku<const Array: [[cell_type; 9]; 9]>
-where Assert<{ sudoku_is_valid(Array) }>: IsTrue;
+pub struct Sudoku<const ARRAY: [[CellType; 9]; 9]>
+where Assert<{ sudoku_is_valid(ARRAY) }>: IsTrue;
 
-const fn are_diff_type_params(x1: cell_type, x2: cell_type, x3: cell_type, x4: cell_type, x5: cell_type, x6: cell_type, x7: cell_type, x8: cell_type, x9: cell_type) -> bool { // Enumなどを使う場合は、その型用にmatchなどで不等を示すconst関数を実装する
+const fn are_diff_type_params(x1: CellType, x2: CellType, x3: CellType, x4: CellType, x5: CellType, x6: CellType, x7: CellType, x8: CellType, x9: CellType) -> bool { // Enumなどを使う場合は、その型用にmatchなどで不等を示すconst関数を実装する
     x1 != x2 && x1 != x3 && x1 != x4 && x1 != x5 && x1 != x6 && x1 != x7 && x1 != x8 && x1 != x9
     && x2 != x3 && x2 != x4 && x2 != x5 && x2 != x6 && x2 != x7 && x2 != x8 && x2 != x9
     && x3 != x4 && x3 != x5 && x3 != x6 && x3 != x7 && x3 != x8 && x3 != x9
@@ -51,7 +51,7 @@ const fn are_diff_type_params(x1: cell_type, x2: cell_type, x3: cell_type, x4: c
     && x8 != x9
 }
 
-const fn sudoku_is_valid(array: [[cell_type; 9]; 9]) -> bool {
+const fn sudoku_is_valid(array: [[CellType; 9]; 9]) -> bool {
     ( // 横行
         are_diff_type_params(array[0][0], array[0][1], array[0][2], array[0][3], array[0][4], array[0][5], array[0][6], array[0][7], array[0][8])
         && are_diff_type_params(array[1][0], array[1][1], array[1][2], array[1][3], array[1][4], array[1][5], array[1][6], array[1][7], array[1][8])
