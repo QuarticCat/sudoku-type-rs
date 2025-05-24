@@ -1,3 +1,6 @@
+#![feature(generic_const_exprs)]
+#![feature(specialization)]
+
 pub struct _1;
 pub struct _2;
 pub struct _3;
@@ -22,121 +25,46 @@ impl IsCell for _8 {}
 impl IsCell for _9 {}
 impl IsCell for __ {}
 
-trait IsDiffType<T, U> {}
-impl IsDiffType<_1, _2> for () {}
-impl IsDiffType<_1, _3> for () {}
-impl IsDiffType<_1, _4> for () {}
-impl IsDiffType<_1, _5> for () {}
-impl IsDiffType<_1, _6> for () {}
-impl IsDiffType<_1, _7> for () {}
-impl IsDiffType<_1, _8> for () {}
-impl IsDiffType<_1, _9> for () {}
 
-impl IsDiffType<_2, _1> for () {}
-impl IsDiffType<_2, _3> for () {}
-impl IsDiffType<_2, _4> for () {}
-impl IsDiffType<_2, _5> for () {}
-impl IsDiffType<_2, _6> for () {}
-impl IsDiffType<_2, _7> for () {}
-impl IsDiffType<_2, _8> for () {}
-impl IsDiffType<_2, _9> for () {}
+struct Assert<const COND: bool>;
 
-impl IsDiffType<_3, _1> for () {}
-impl IsDiffType<_3, _2> for () {}
-impl IsDiffType<_3, _4> for () {}
-impl IsDiffType<_3, _5> for () {}
-impl IsDiffType<_3, _6> for () {}
-impl IsDiffType<_3, _7> for () {}
-impl IsDiffType<_3, _8> for () {}
-impl IsDiffType<_3, _9> for () {}
+trait IsTrue {}
+impl IsTrue for Assert<true> {}
 
-impl IsDiffType<_4, _1> for () {}
-impl IsDiffType<_4, _2> for () {}
-impl IsDiffType<_4, _3> for () {}
-impl IsDiffType<_4, _5> for () {}
-impl IsDiffType<_4, _6> for () {}
-impl IsDiffType<_4, _7> for () {}
-impl IsDiffType<_4, _8> for () {}
-impl IsDiffType<_4, _9> for () {}
+trait IsFalse {}
+impl IsFalse for Assert<false> {}
 
-impl IsDiffType<_5, _1> for () {}
-impl IsDiffType<_5, _2> for () {}
-impl IsDiffType<_5, _3> for () {}
-impl IsDiffType<_5, _4> for () {}
-impl IsDiffType<_5, _6> for () {}
-impl IsDiffType<_5, _7> for () {}
-impl IsDiffType<_5, _8> for () {}
-impl IsDiffType<_5, _9> for () {}
 
-impl IsDiffType<_6, _1> for () {}
-impl IsDiffType<_6, _2> for () {}
-impl IsDiffType<_6, _3> for () {}
-impl IsDiffType<_6, _4> for () {}
-impl IsDiffType<_6, _5> for () {}
-impl IsDiffType<_6, _7> for () {}
-impl IsDiffType<_6, _8> for () {}
-impl IsDiffType<_6, _9> for () {}
+trait EqHelper<T, U> {
+    const ARE_EQUAL: bool;
+}
+impl<T, U> EqHelper<T, U> for () {
+    default const ARE_EQUAL: bool = false;
+}
+impl<T> EqHelper<T, T> for () {
+    const ARE_EQUAL: bool = true;
+}
 
-impl IsDiffType<_7, _1> for () {}
-impl IsDiffType<_7, _2> for () {}
-impl IsDiffType<_7, _3> for () {}
-impl IsDiffType<_7, _4> for () {}
-impl IsDiffType<_7, _5> for () {}
-impl IsDiffType<_7, _6> for () {}
-impl IsDiffType<_7, _8> for () {}
-impl IsDiffType<_7, _9> for () {}
 
-impl IsDiffType<_8, _1> for () {}
-impl IsDiffType<_8, _2> for () {}
-impl IsDiffType<_8, _3> for () {}
-impl IsDiffType<_8, _4> for () {}
-impl IsDiffType<_8, _5> for () {}
-impl IsDiffType<_8, _6> for () {}
-impl IsDiffType<_8, _7> for () {}
-impl IsDiffType<_8, _9> for () {}
+trait NotEq<T, U> {}
 
-impl IsDiffType<_9, _1> for () {}
-impl IsDiffType<_9, _2> for () {}
-impl IsDiffType<_9, _3> for () {}
-impl IsDiffType<_9, _4> for () {}
-impl IsDiffType<_9, _5> for () {}
-impl IsDiffType<_9, _6> for () {}
-impl IsDiffType<_9, _7> for () {}
-impl IsDiffType<_9, _8> for () {}
-
-impl IsDiffType<_1, __> for () {}
-impl IsDiffType<_2, __> for () {}
-impl IsDiffType<_3, __> for () {}
-impl IsDiffType<_4, __> for () {}
-impl IsDiffType<_5, __> for () {}
-impl IsDiffType<_6, __> for () {}
-impl IsDiffType<_7, __> for () {}
-impl IsDiffType<_8, __> for () {}
-impl IsDiffType<_9, __> for () {}
-impl IsDiffType<__, __> for () {}
-impl IsDiffType<__, _1> for () {}
-impl IsDiffType<__, _2> for () {}
-impl IsDiffType<__, _3> for () {}
-impl IsDiffType<__, _4> for () {}
-impl IsDiffType<__, _5> for () {}
-impl IsDiffType<__, _6> for () {}
-impl IsDiffType<__, _7> for () {}
-impl IsDiffType<__, _8> for () {}
-impl IsDiffType<__, _9> for () {}
+impl<T, U> NotEq<T, U> for ()
+where
+    Assert<{ <() as EqHelper<T, U>>::ARE_EQUAL }>: IsFalse,
+{}
 
 trait AreDiffTypeParams<T1, T2, T3, T4, T5, T6, T7, T8, T9> {}
 impl<T1, T2, T3, T4, T5, T6, T7, T8, T9> AreDiffTypeParams<T1, T2, T3, T4, T5, T6, T7, T8, T9> for ()
 where
-    (): IsDiffType<T1, T2> + IsDiffType<T1, T3> + IsDiffType<T1, T4> + IsDiffType<T1, T5> + IsDiffType<T1, T6> + IsDiffType<T1, T7> + IsDiffType<T1, T8> + IsDiffType<T1, T9>,
-    (): IsDiffType<T2, T3> + IsDiffType<T2, T4> + IsDiffType<T2, T5> + IsDiffType<T2, T6> + IsDiffType<T2, T7> + IsDiffType<T2, T8> + IsDiffType<T2, T9>,
-    (): IsDiffType<T3, T4> + IsDiffType<T3, T5> + IsDiffType<T3, T6> + IsDiffType<T3, T7> + IsDiffType<T3, T8> + IsDiffType<T3, T9>,
-    (): IsDiffType<T4, T5> + IsDiffType<T4, T6> + IsDiffType<T4, T7> + IsDiffType<T4, T8> + IsDiffType<T4, T9>,
-    (): IsDiffType<T5, T6> + IsDiffType<T5, T7> + IsDiffType<T5, T8> + IsDiffType<T5, T9>,
-    (): IsDiffType<T6, T7> + IsDiffType<T6, T8> + IsDiffType<T6, T9>,
-    (): IsDiffType<T7, T8> + IsDiffType<T7, T9>,
-    (): IsDiffType<T8, T9>,
+    (): NotEq<T1, T2> + NotEq<T1, T3> + NotEq<T1, T4> + NotEq<T1, T5> + NotEq<T1, T6> + NotEq<T1, T7> + NotEq<T1, T8> + NotEq<T1, T9>,
+    (): NotEq<T2, T3> + NotEq<T2, T4> + NotEq<T2, T5> + NotEq<T2, T6> + NotEq<T2, T7> + NotEq<T2, T8> + NotEq<T2, T9>,
+    (): NotEq<T3, T4> + NotEq<T3, T5> + NotEq<T3, T6> + NotEq<T3, T7> + NotEq<T3, T8> + NotEq<T3, T9>,
+    (): NotEq<T4, T5> + NotEq<T4, T6> + NotEq<T4, T7> + NotEq<T4, T8> + NotEq<T4, T9>,
+    (): NotEq<T5, T6> + NotEq<T5, T7> + NotEq<T5, T8> + NotEq<T5, T9>,
+    (): NotEq<T6, T7> + NotEq<T6, T8> + NotEq<T6, T9>,
+    (): NotEq<T7, T8> + NotEq<T7, T9>,
+    (): NotEq<T8, T9>,
 {}
-
 
 pub struct Sudoku<
     X11, X12, X13, X14, X15, X16, X17, X18, X19,
@@ -207,16 +135,16 @@ where
 
 fn main() {
     let sudoku = Sudoku (
-        __, __, __,  __, __, _9,  __, _2, __,
-        _2, __, __,  __, __, __,  _4, __, __,
-        __, _8, __,  __, __, _2,  __, __, _5,
+        _5, _3, _4,  _6, _7, _8,  _9, _1, _2,
+        _6, _7, _2,  _1, _9, _5,  _3, _4, _8,
+        _1, _9, _8,  _3, _4, _2,  _5, _6, _7,
 
-        __, __, __,  __, _2, __,  __, __, _2,
-        __, __, _6,  _4, __, _3,  __, _5, __,
-        __, __, __,  _1, __, _8,  __, __, _9,
+        _8, _5, _9,  _7, _6, _1,  _4, _2, _3,
+        _4, _2, _6,  _8, _5, _3,  _7, _9, _1,
+        _7, _1, _3,  _9, _2, _4,  _8, _5, _6,
 
-        __, __, __,  _2, __, __,  __, _8, __,
-        __, _1, __,  __, _8, __,  _3, __, __,
-        __, __, __,  __, __, _4,  __, _9, __,
+        _9, _6, _1,  _5, _3, _7,  _2, _8, _4,
+        _2, _8, _7,  _4, _1, _9,  _6, _3, _5,
+        _3, _4, _5,  _2, _8, _6,  _1, _7, _9
     );
 }

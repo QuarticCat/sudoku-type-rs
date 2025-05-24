@@ -9,12 +9,12 @@ path = "src/sudoku_stable.rs"
 
 [[bin]]
 name = "sudoku_generic_const_exprs"
-path = "src/sudoku_generic_const_exprs.rs"
+path = "src/sudoku_specialization.rs"
 
 [[bin]]
-name = "sudoku_negative_bounds"
-path = "src/sudoku_negative_bounds.rs"
+name = "sudoku_const_params_for"
+path = "src/sudoku_const_params_for.rs"
 
 [[bin]]
 name = "sudoku_const_params"
-path = "src/sudoku_const_params.rs"
+path = "src/sudoku_generic_const_exprs.rs"
